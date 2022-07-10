@@ -12,7 +12,9 @@ class HelpController extends Controller
     //
     function index(){
         $helps = Help::join('users', 'users.id', 'help.user_id')
-        ->whereNotIn('help.id', DB::raw('select help_id from report'))
+        ->whereNotIn('help.id', function ($query) {
+            $query->select('help_id')->from('report');
+        })
         ->get();
         return response()->json([
             "status" => 1,
