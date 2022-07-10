@@ -15,6 +15,7 @@ class DocumentController extends Controller
         ->join('document_category', 
         'document_category.id', 'document.category_id')
         ->join('users', 'users.id', 'document.user_id')
+        ->orderBy('status', 'desc')
         ->get();
         return response()->json([
             "status" => 1,
