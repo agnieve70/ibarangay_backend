@@ -30,7 +30,6 @@ class ReportController extends Controller
             'representative_id' => 'required',
             'content' => 'required',
             'category' => 'required',
-            'status' => 'required',
         ]);
 
         $report = new Report();
