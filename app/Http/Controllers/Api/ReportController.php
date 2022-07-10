@@ -29,6 +29,7 @@ class ReportController extends Controller
         $request->validate([
             'help_id' => 'required',
             'representative_id' => 'required',
+            'title' => 'required',
             'content' => 'required',
             'category' => 'required',
         ]);
@@ -36,6 +37,7 @@ class ReportController extends Controller
         $report = new Report();
         $report->help_id = $request->help_id;
         $report->representative_id = $request->representative_id;
+        $report->title = $request->title;
         $report->content = $request->content;
         $report->category = $request->category;
         $report->status = "done";

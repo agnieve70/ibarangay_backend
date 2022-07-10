@@ -16,6 +16,7 @@ class CreateReportTable extends Migration
         Schema::create('report', function (Blueprint $table) {
             $table->id();
             $table->string('help_id');
+            $table->longText('title');
             $table->longText('content');
             $table->string('category');
             $table->string('status');
