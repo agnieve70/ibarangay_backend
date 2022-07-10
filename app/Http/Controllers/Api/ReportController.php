@@ -26,6 +26,22 @@ class ReportController extends Controller
         ], 200);
     }
 
+    function getDetail($id){
+        $report = Report::select('report.id','report.title as report_title', 'latitude', 'longitude','report.content as report_content','category','report.status',
+        'representative_id', 'help_category.title as category', 'report.created_at', 'report.updated_at',
+        DB::raw('(SELECT name from users WHERE users.id = help.user_id) as `helped_user`'))
+        ->join('help', 'help.id', 'report.help_id')
+        ->join('help_category', 'help_category.id', 'report.category')
+        ->where('report.id', $id)
+        ->first();
+
+        return response()->json([
+            "status" => 1,
+            "message" => "Fetched Successfully",
+            "data" => $report,
+        ], 200);
+    }
+
     function create(Request $request){
         $request->validate([
             'help_id' => 'required',
