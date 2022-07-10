@@ -20,7 +20,6 @@ class CreateReportTable extends Migration
             $table->string('category');
             $table->string('status');
             $table->string('representative_id');
-            $table->string('image');
             $table->timestamps();
         });
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\DocumentCategoryController;
 use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\HelpCategoryController;
 use App\Http\Controllers\Api\HelpController;
+use App\Http\Controllers\Api\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::get("help", [ HelpController::class, "index"]);
     Route::get("help/{id}", [ HelpController::class, "getHelp"]);
     Route::post("help/create", [ HelpController::class, "create"]);
+
+    Route::get("reports", [ ReportController::class, "index"]);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
