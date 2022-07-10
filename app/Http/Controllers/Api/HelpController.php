@@ -19,7 +19,7 @@ class HelpController extends Controller
     }
 
     function getHelp($id){
-        $help = Help::find($id);
+        $help = Help::join('users', 'users.id', 'help.user_id')->find($id);
         return response()->json([
             "status" => 1,
             "message" => "Fetched Successfully",
