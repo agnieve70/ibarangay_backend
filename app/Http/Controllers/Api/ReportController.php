@@ -12,7 +12,7 @@ class ReportController extends Controller
 {
     //
     function index(){
-        $reports = Report::select('report.id','content','category','report.status',
+        $reports = Report::select('report.id','title','content','category','report.status',
         DB::raw('(SELECT name from users WHERE users.id = help.user_id) as `helped_user`'), 
         DB::raw('(SELECT name from users WHERE users.id = report.representative_id) as `representative`'))
         ->join('help', 'help.id', 'report.help_id')
