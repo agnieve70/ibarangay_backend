@@ -39,6 +39,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::post("help/create", [ HelpController::class, "create"]);
 
     Route::get("reports", [ ReportController::class, "index"]);
+    Route::get("report/create", [ ReportController::class, "create"]);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
