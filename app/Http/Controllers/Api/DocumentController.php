@@ -10,7 +10,9 @@ class DocumentController extends Controller
 {
     //
     function index(){
-        $documents = Document::join('document_category', 
+        $documents = Document::select('document.id', 'name', 'email', 
+        'document_category.category', 'title', 'status', 'document.created_at', 'document.updated_at')
+        ->join('document_category', 
         'document_category.id', 'document.category_id')
         ->join('users', 'users.id', 'document.user_id')
         ->get();
