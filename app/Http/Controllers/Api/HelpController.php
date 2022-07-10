@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Help;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HelpController extends Controller
 {
     //
     function index(){
-        $helps = Help::join('users', 'users.id', 'help.user_id')->get();
+        $helps = Help::join('users', 'users.id', 'help.user_id')
+        ->whereNotIn('help.id', DB::raw('select help_id from report'))
+        ->get();
         return response()->json([
             "status" => 1,
             "message" => "Fetched Successfully",
