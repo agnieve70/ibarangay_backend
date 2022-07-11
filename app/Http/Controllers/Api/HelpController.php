@@ -39,6 +39,14 @@ class HelpController extends Controller
             'status' => 'required',
         ]);
 
+        if(Help::where('user_id', auth()->user()->id)
+        ->first()){
+            return response()->json([
+                "status" => 0,
+                "message" => "Please be Patient Help is on the way.",
+            ], 401);
+        }
+
         $help = new Help();
         $help->latitude = $request->latitude;
         $help->longitude = $request->longitude;
