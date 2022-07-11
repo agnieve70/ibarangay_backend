@@ -9,6 +9,22 @@ use Illuminate\Http\Request;
 class DocumentController extends Controller
 {
     //
+    function getDocumentsByUser(){
+        $documents = Document::select('document.id', 'name', 'email', 
+        'document_category.category', 'title', 'status', 'document.created_at', 'document.updated_at')
+        ->join('document_category', 
+        'document_category.id', 'document.category_id')
+        ->join('users', 'users.id', 'document.user_id')
+        ->orderBy('status', 'desc')
+        ->where('user_id', auth()->user()->id)
+        ->get();
+        return response()->json([
+            "status" => 1,
+            "message" => "Fetched Successfully",
+            "data" => $documents,
+        ], 200);
+    }
+
     function index(){
         $documents = Document::select('document.id', 'name', 'email', 
         'document_category.category', 'title', 'status', 'document.created_at', 'document.updated_at')

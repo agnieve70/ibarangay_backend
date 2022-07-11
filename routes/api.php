@@ -27,6 +27,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::get("document/categories", [ DocumentCategoryController::class, "index"]);
     Route::post("document/category/create", [ DocumentCategoryController::class, "create"]);
     Route::get("documents", [ DocumentController::class, "index"]);
+    Route::get("document/by-user", [ DocumentController::class, "getDocumentsByUser"]);
     Route::post("document/create", [ DocumentController::class, "create"]);
     Route::post("document/update", [ DocumentController::class, "update"]);
 
