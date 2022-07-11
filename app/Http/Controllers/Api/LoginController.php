@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -25,10 +26,13 @@ class LoginController extends Controller
 
         $token = $request->user()->createToken($request->email);
 
+        $user = User::where('email', $request->email)->first();
+
         return response()->json([
             "status" => 1,
             "message" => "Login Successfully",
             "token" => $token->plainTextToken,
+            "user" => $user
         ], 200);
     }
 }
