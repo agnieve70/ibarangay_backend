@@ -31,6 +31,14 @@ class DocumentController extends Controller
             'status' => 'required',
         ]);
 
+        if(Document::where('user_id', auth()->user()->id)
+        ->where('status', 'on process')->first()){
+            return response()->json([
+                "status" => 0,
+                "message" => "1 Request at a time",
+            ], 401);
+        }
+
         $document = new Document();
         $document->title = $request->title;
         $document->category_id = $request->category_id;
