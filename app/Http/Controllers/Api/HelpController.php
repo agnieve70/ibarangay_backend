@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\DB;
 class HelpController extends Controller
 {
     //
+
+    function getHelpByUser(){
+        $helps = Help::select('help.id', 'latitude', 'longitude', 'status', 'name', 'email', 'help.created_at')->join('users', 'users.id', 'help.user_id')
+        ->whereNotIn('help.id', function ($query) {
+            $query->select('help_id')->from('report');
+        })
+        ->get();
+        return response()->json([
+            "status" => 1,
+            "message" => "Fetched Successfully",
+            "data" => $helps,
+        ], 200);
+    }
+
     function index(){
         $helps = Help::select('help.id', 'latitude', 'longitude', 'status', 'name', 'email', 'help.created_at')->join('users', 'users.id', 'help.user_id')
         ->whereNotIn('help.id', function ($query) {
@@ -39,13 +53,13 @@ class HelpController extends Controller
             'status' => 'required',
         ]);
 
-        if(Help::where('user_id', auth()->user()->id)
-        ->first()){
-            return response()->json([
-                "status" => 0,
-                "message" => "Please be Patient Help is on the way.",
-            ], 401);
-        }
+        // if(Help::where('user_id', auth()->user()->id)
+        // ->first()){
+        //     return response()->json([
+        //         "status" => 0,
+        //         "message" => "Please be Patient Help is on the way.",
+        //     ], 401);
+        // }
 
         $help = new Help();
         $help->latitude = $request->latitude;
