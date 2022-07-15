@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\DocumentCategoryController;
 use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\HelpCategoryController;
 use App\Http\Controllers\Api\HelpController;
+use App\Http\Controllers\Api\PurokController;
 use App\Http\Controllers\Api\ReportController;
 
 /*
@@ -33,6 +34,8 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::post("document/update", [ DocumentController::class, "update"]);
     Route::post("announcement/create", [ AnnouncementController::class, "create"]);
     Route::get("announcements", [ AnnouncementController::class, "index"]);
+    Route::get("puroks", [ PurokController::class, "index"]);
+    Route::get("purok/create", [ PurokController::class, "create"]);
 
     Route::get("help/category", [ HelpCategoryController::class, "index"]);
     Route::post("help/category/create", [ HelpCategoryController::class, "create"]);

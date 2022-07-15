@@ -38,6 +38,7 @@ class RegisterController extends Controller
             $user->lastname = $request->lastname;
             $user->name = $request->name;
             $user->role = $request->role;
+            $user->purok = $request->purok;
 
             $str_rnd = Str::random(5);
             $user->remember_token = $str_rnd;
