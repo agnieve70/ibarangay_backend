@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Eula;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -20,6 +21,16 @@ class RegisterController extends Controller
             "data" => $users
         ], 200);
     }
+
+    function getEula(){
+        $eula = Eula::first();
+        return response()->json([
+            "status" => 1,
+            "message" => "Fetched Data",
+            "data" => $eula
+        ], 200);
+    }
+    
     function index(Request $request){
         try {
 
