@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AnnouncementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
@@ -30,6 +31,8 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::get("document/by-user", [ DocumentController::class, "getDocumentsByUser"]);
     Route::post("document/create", [ DocumentController::class, "create"]);
     Route::post("document/update", [ DocumentController::class, "update"]);
+    Route::post("announcement/create", [ AnnouncementController::class, "create"]);
+    Route::post("announcements", [ AnnouncementController::class, "index"]);
 
     Route::get("help/category", [ HelpCategoryController::class, "index"]);
     Route::post("help/category/create", [ HelpCategoryController::class, "create"]);
