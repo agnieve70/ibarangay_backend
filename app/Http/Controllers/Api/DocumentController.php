@@ -10,7 +10,7 @@ class DocumentController extends Controller
 {
     //
     function getDocumentsByUser(){
-        $documents = Document::select('document.id', 'name', 'email', 
+        $documents = Document::select('document.id','firstname', 'lastname', 'name', 'email', 
         'document_category.category', 'title', 'status', 'document.created_at', 'document.updated_at')
         ->join('document_category', 
         'document_category.id', 'document.category_id')
@@ -26,7 +26,7 @@ class DocumentController extends Controller
     }
 
     function index(){
-        $documents = Document::select('document.id', 'name', 'email', 
+        $documents = Document::select('document.id', 'firstname', 'lastname','name', 'email', 
         'document_category.category', 'title', 'status', 'document.created_at', 'document.updated_at')
         ->join('document_category', 
         'document_category.id', 'document.category_id')
