@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\ReportController;
 */
 Route::post("register", [ RegisterController::class, "index"]);
 Route::post("login", [ LoginController::class, "index"]);
+Route::get("puroks", [ PurokController::class, "index"]);
 
 Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::get("document/categories", [ DocumentCategoryController::class, "index"]);
@@ -34,7 +35,6 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::post("document/update", [ DocumentController::class, "update"]);
     Route::post("announcement/create", [ AnnouncementController::class, "create"]);
     Route::get("announcements", [ AnnouncementController::class, "index"]);
-    Route::get("puroks", [ PurokController::class, "index"]);
     Route::post("purok/create", [ PurokController::class, "create"]);
 
     Route::get("help/category", [ HelpCategoryController::class, "index"]);
