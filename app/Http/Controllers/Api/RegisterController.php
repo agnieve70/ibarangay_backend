@@ -24,6 +24,8 @@ class RegisterController extends Controller
         try {
 
             $request->validate([
+                'firstname' => 'required',
+                'lastname' => 'required',
                 'name' => 'required|unique:users',
                 'email' => 'required|email|unique:users',
                 'role' => 'required',
@@ -32,6 +34,8 @@ class RegisterController extends Controller
 
             $user = new User();
             $user->email = $request->email;
+            $user->firstname = $request->firstname;
+            $user->lastname = $request->lastname;
             $user->name = $request->name;
             $user->role = $request->role;
 
