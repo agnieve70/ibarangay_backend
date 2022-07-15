@@ -11,8 +11,26 @@ class HelpController extends Controller
 {
     //
 
-    function getHelpByUser(){
-        $helps = Help::select('help.id', 'latitude', 'longitude', 'status', 'firstname', 'lastname','name', 'email', 'help.created_at')->join('users', 'users.id', 'help.user_id')
+    function getHelpValidate(){
+        $helps = Help::select('help.id', 'latitude',
+        'longitude', 'status', 'firstname',
+        'lastname','name', 'email', 'help.created_at')
+        ->join('users', 'users.id', 'help.user_id')
+        ->whereNotIn('help.id', function ($query) {
+            $query->select('help_id')->from('report');
+        })
+        ->where('user_id', auth()->user()->id)
+        ->get();
+        return response()->json([
+            "status" => 1,
+            "message" => "Fetched Successfully",
+            "data" => $helps,
+        ], 200);
+    }
+
+    function index(){
+        $helps = Help::select('help.id', 'latitude', 'longitude', 'status', 'firstname', 'lastname','name', 'email', 'help.created_at')
+        ->join('users', 'users.id', 'help.user_id')
         ->whereNotIn('help.id', function ($query) {
             $query->select('help_id')->from('report');
         })
@@ -24,16 +42,12 @@ class HelpController extends Controller
         ], 200);
     }
 
-    function index(){
-        $helps = Help::select('help.id', 'latitude', 'longitude', 'status', 'firstname', 'lastname','name', 'email', 'help.created_at')->join('users', 'users.id', 'help.user_id')
-        ->whereNotIn('help.id', function ($query) {
-            $query->select('help_id')->from('report');
-        })
-        ->get();
+    function getHelpUser($id){
+        $help = Help::join('users', 'users.id', 'help.user_id')->find($id);
         return response()->json([
             "status" => 1,
             "message" => "Fetched Successfully",
-            "data" => $helps,
+            "data" => $help,
         ], 200);
     }
 

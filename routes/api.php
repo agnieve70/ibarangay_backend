@@ -40,6 +40,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::get("help/category", [ HelpCategoryController::class, "index"]);
     Route::post("help/category/create", [ HelpCategoryController::class, "create"]);
     Route::post("help/category/update", [ HelpCategoryController::class, "update"]);
+    Route::get("help/validate", [ HelpController::class, "getHelpValidate"]);
 
     Route::get("help", [ HelpController::class, "index"]);
     Route::get("help/{id}", [ HelpController::class, "getHelp"]);
